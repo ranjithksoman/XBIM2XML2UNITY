@@ -1,0 +1,363 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+/***************************************/
+using Xbim.Ifc;
+using Xbim.Ifc2x3.ProductExtension;
+using Xbim.Ifc2x3.Extensions;
+using Xbim.Ifc4.Interfaces;
+using Xbim.Common.Geometry;
+using Xbim.ModelGeometry.Scene;
+using Xbim.Presentation;
+using Xbim.XbimExtensions;
+using Xbim.Common.XbimExtensions;
+/**************************************/
+using System.Xml;
+using System.Xml.Linq;
+using System.IO;
+
+namespace XBIM_to_XML_Application
+{
+    class Program
+    {
+
+        const string file = "D:/Ani_Thesis/THESIS/trialbim_simple.ifc";
+        //static Dictionary<int, Dictionary<int,Dictionary<int,Dictionary<int,List<int>>>>> temp;
+
+        //create the xmlWriter as a static variable in order to use it everywhere in the code.
+        static XmlTextWriter xmlWriter;
+
+        //Use automatic indentation for readability.
+
+        public static void Main()
+        {
+            
+            using (var model = IfcStore.Open(file))
+            {
+                
+                Console.WriteLine("\n" + "---------------------------------------S T A R T---------------------------------------" + "\n");
+                Dictionary<string, IfcSpace> spaceids;
+                Dictionary<string, IfcBuildingStorey> storeyids;
+
+                var project = model.Instances.FirstOrDefault<IIfcProject>();
+
+                IEnumerable<IfcSpace> spaces = model.Instances.OfType<IfcSpace>();
+                spaceids = getspaceelementids(spaces);
+
+                IEnumerable<IfcBuildingStorey> storeys = model.Instances.OfType<IfcBuildingStorey>();
+                storeyids = getstoreyelementids(storeys);
+
+                var context = new Xbim3DModelContext(model);
+                context.CreateContext();
+
+                var productshape = context.ShapeInstances();
+
+                var _productShape = context.ShapeInstances().Where(s => s.RepresentationType != XbimGeometryRepresentationType.OpeningsAndAdditionsExcluded).ToList();
+
+                //name of the model
+                var name_of_model = file.Split(new char[] { '\\' }).Last();
+
+                //number of shapes in the model
+                var number_of_shapes = _productShape.Count();
+
+                Console.WriteLine("OPENED MODEL : " + name_of_model + " | No of shape Instances in the model is : " + number_of_shapes + "\n");
+
+
+                //get the name of the model without the ifc extention
+                var name_of_file = name_of_model.Split('.')[0];
+
+                //creating the xml file in the project directory named after the name of the model
+                xmlWriter = new XmlTextWriter(name_of_file + ".xml", null);
+
+                //in order to have the correct xml format 
+                xmlWriter.Formatting = Formatting.Indented;
+
+                xmlWriter.WriteStartDocument(); // begin writing to the xml document
+                
+                GenerateHierarchy(project, 0, spaceids, storeyids, _productShape, number_of_shapes, context);
+                
+                xmlWriter.WriteEndDocument();
+                xmlWriter.Close();
+                Console.WriteLine("\n" + "---------------------------------------E N D---------------------------------------" + "\n");
+                /********************************************************************************/
+
+            }
+            
+        }
+
+        private static void GenerateHierarchy(IIfcObjectDefinition o, int level, Dictionary<string, IfcSpace> spaceidset, Dictionary<string, IfcBuildingStorey> storeyidset, List<XbimShapeInstance> _shapes, int number_of_shapes, Xbim3DModelContext mod_context)
+        {
+
+            Console.WriteLine($"{GetIndent(level)}{" >> " + o.Name} [{o.GetType().Name}{ " | #" + o.EntityLabel  }] {"\n"}");
+            var item = o.IsDecomposedBy.SelectMany(r => r.RelatedObjects);
+
+            xmlWriter.WriteStartElement(o.Name.ToString() + " | " + o.GetType().Name.ToString() ); //working
+            xmlWriter.WriteAttributeString("ID", o.EntityLabel.ToString()); //working
+            xmlWriter.WriteAttributeString("CreateGameObject", "True"); //trial
+
+            foreach (var i in item)
+            {
+
+                var id = i.GlobalId.ToString();
+                
+                GenerateHierarchy(i, level + 2, spaceidset, storeyidset, _shapes, number_of_shapes, mod_context);
+                
+                if (spaceidset.ContainsKey(id))
+                {
+                    IfcSpace spacenode;
+                    spaceidset.TryGetValue(id, out spacenode);
+                    var spacenodelelems = spacenode.GetContainedElements();
+
+                    if (spacenodelelems.Count() > 0)
+                    {
+                        Console.WriteLine($"{GetIndent(level + 4)}" + "OBJECTS FOUND UNDER SPACE ARE: \n");
+
+                        foreach (var sne in spacenodelelems)
+                        {
+                            var parent = sne.IsContainedIn;
+                            var eid = sne.EntityLabel.ToString();
+
+                            string name_of_shape = sne.Name.ToString();
+                            string type_of_shape = sne.GetType().Name.ToString();
+
+                            Console.WriteLine($"{GetIndent(level + 5)}{" --> " + sne.Name} [{sne.GetType().Name}{ " | #" + sne.EntityLabel }{" | PARENT : #" + parent.EntityLabel}]");
+                            
+                            var si = _shapes.Find(x => x.IfcProductLabel.ToString() == eid);
+                            //Console.WriteLine("------------------Matches found :" + si.ShapeGeometryLabel.ToString());
+
+                            //write the name of the shape  with its id
+                            xmlWriter.WriteStartElement(name_of_shape + " | " + type_of_shape);
+                            xmlWriter.WriteAttributeString("ID", sne.EntityLabel.ToString());
+                            xmlWriter.WriteAttributeString("CreateGameObject", "True"); //trial
+
+                            getgeometry(si, mod_context,sne.EntityLabel, number_of_shapes);
+
+                            xmlWriter.WriteEndElement();
+                        }
+                    }
+                }
+
+                else if (storeyidset.ContainsKey(id))
+                {
+                    IfcBuildingStorey bsnode;
+                    storeyidset.TryGetValue(id, out bsnode);
+                    var bsnodelelems = bsnode.GetContainedElements();
+
+                    if (bsnodelelems.Count() > 0)
+                    {
+                        Console.WriteLine($"{GetIndent(level + 4)}" + "OTHER OBJECTS FOUND UNDER STOREY ARE: \n");
+                        
+                        foreach (var bsne in bsnodelelems)
+                        {
+                            var parent = bsne.IsContainedIn;
+                            var eid = bsne.EntityLabel.ToString();
+
+                            string name_of_shape = bsne.Name.ToString();
+                            string type_of_shape = bsne.GetType().Name.ToString();
+
+                            Console.WriteLine($"{GetIndent(level + 5)}{" --> " + bsne.Name} [{name_of_shape}{ " | #" + bsne.EntityLabel } {" | PARENT : #" + parent.EntityLabel }]");
+                            //Console.WriteLine("--------------" + bsne.EntityLabel);
+                            
+                            var si = _shapes.Find(x => x.IfcProductLabel.ToString() == eid);
+
+                            //write the name of the shape  with its id
+                            xmlWriter.WriteStartElement(name_of_shape + " | " + type_of_shape);
+                            xmlWriter.WriteAttributeString("ID", bsne.EntityLabel.ToString());
+                            xmlWriter.WriteAttributeString("CreateGameObject", "True"); //trial
+
+                            getgeometry(si, mod_context, bsne.EntityLabel, number_of_shapes);
+
+                            // for each XML element that we created we should close it in order to have the correct hierarchy in the xml file
+                            xmlWriter.WriteEndElement();
+
+                        }
+                    }
+
+                }
+
+                /***************************************************************************/
+                xmlWriter.WriteEndElement();// working
+            }
+            
+        }
+
+        
+        private static string GetIndent(int level)
+        {
+            var indent = "";
+            for (int i = 0; i < level; i++)
+                indent += "  ";
+            return indent;
+        }
+
+        private static Dictionary<string, IfcSpace> getspaceelementids(IEnumerable<IfcSpace> spaces_ien)
+        {
+            Dictionary<string, IfcSpace> eids = new Dictionary<string, IfcSpace>();
+            foreach (IfcSpace s in spaces_ien)
+            {
+                eids.Add(s.GlobalId.ToString(), s);
+                //Console.WriteLine("Gid for " + s.Name + " is: " +s.GlobalId.ToString());
+            }
+
+            return eids;
+        }
+
+        private static Dictionary<string, IfcBuildingStorey> getstoreyelementids(IEnumerable<IfcBuildingStorey> storeys_ien)
+        {
+            Dictionary<string, IfcBuildingStorey> eids = new Dictionary<string, IfcBuildingStorey>();
+            foreach (IfcBuildingStorey s in storeys_ien)
+            {
+                eids.Add(s.GlobalId.ToString(), s);
+                //Console.WriteLine("Gid for " + s.Name + " is: " +s.GlobalId.ToString());
+            }
+
+            return eids;
+        }
+
+        
+        /************************************************************************************************************/
+        private static void getgeometry(XbimShapeInstance shape, Xbim3DModelContext m_context, int entityLabel, int number_of_shapes)
+        {
+
+            XbimShapeTriangulation mesh = null; // create an empty mesh to write to
+
+            var geometry = m_context.ShapeGeometry(shape); // the the geometry of the 'shape' from the model context
+
+
+            Console.WriteLine($"{"\n"}{GetIndent(11)}{"--Geometry Type: " + geometry.Format}");
+
+
+            var ms = new MemoryStream(((IXbimShapeGeometryData)geometry).ShapeData);//write the shape data as a memory stream to 'ms'
+            var br = new BinaryReader(ms); // parse 'ms' to read the binary data to get the geometric info
+
+            mesh = br.ReadShapeTriangulation(); // read the shape triangulation to the empty mesh
+            mesh = mesh.Transform(((XbimShapeInstance)shape).Transformation); // set the transfromation as read from the model
+
+            var facesfound = mesh.Faces.ToList(); // get all the faces of the mesh
+
+
+            var number_of_faces = facesfound.Count();
+
+            Console.WriteLine($"{"\n"}{GetIndent(11)}{"  -----No. of faces on the shape #" + shape.IfcProductLabel + ": " + number_of_faces}");
+
+            //used for an ID for each face
+            int face_index = 0;
+            //used for the total number of triangles
+            int number_of_triangles = 0;
+
+            //write the Faces element with its count
+            xmlWriter.WriteStartElement("Faces");
+            xmlWriter.WriteAttributeString("NumFaces", number_of_faces.ToString());
+
+            foreach (XbimFaceTriangulation f in facesfound)
+            {
+
+                number_of_triangles = f.TriangleCount;
+                Console.WriteLine($"{"\n"}{GetIndent(13)}{"  -----Triangle count on face: " + f.GetType() + " :mesh is  " + number_of_triangles}");
+                
+                face_index++;
+
+                composetrianglesets(f, mesh, entityLabel, facesfound.Count(), face_index, number_of_triangles, number_of_shapes);
+
+
+            }
+
+            //this ends the faces element in the xml file
+            xmlWriter.WriteEndElement();
+            
+            Console.WriteLine("\n");
+        }
+        
+        private static void composetrianglesets(XbimFaceTriangulation face, XbimShapeTriangulation shapemesh, int entityLabel, int Number_Faces, int face_index, int triangle_Count, int number_of_shapes)
+        {
+            Dictionary<string, List<int>> triangles = new Dictionary<string, List<int>>();
+            Dictionary<string, XbimPoint3D> vertices = new Dictionary<string, XbimPoint3D>();
+
+            List<XbimPoint3D> verts = shapemesh.Vertices.ToList();
+
+            //write each face with its ID
+            xmlWriter.WriteStartElement("Face");
+            xmlWriter.WriteAttributeString("ID", face_index.ToString());
+
+
+            //write the Triangles with its number for each face
+            xmlWriter.WriteStartElement("Triangles");
+            xmlWriter.WriteAttributeString("NumTriangles", triangle_Count.ToString());
+            
+            for (int i = 0; i < face.TriangleCount; i++)
+            {
+                string name = "triangle_" + (i + 1).ToString();
+
+                triangles.Add(name, face.Indices.ToList().GetRange(i * 3, 3)); // face (1) gets the vertices of index [0,1,2] and face (2) gets [3,4,5]
+            }
+
+            //for the id of the triangle
+            int triangle_index = 0;
+
+            foreach (var x in triangles)
+            {
+                //writing each triangle with his ID
+                xmlWriter.WriteStartElement("Triangle");
+                xmlWriter.WriteAttributeString("ID", triangle_index.ToString());
+                
+                var vert1 = x.Value[0];
+                var vert2 = x.Value[1];
+                var vert3 = x.Value[2];
+
+                Console.WriteLine($"{"\n"}{GetIndent(15)}{x.Key + ": "}{vert1 + ","}{vert2 + ","}{vert3}");
+                Console.WriteLine($"{GetIndent(15)}{"---------------------"}");
+
+                //writing the vertices element with its count
+                xmlWriter.WriteStartElement("Vertices");
+                xmlWriter.WriteAttributeString("NumVertices", "3");
+                Double X;
+                Double Y;
+                Double Z;
+                for (int y = 0; y < x.Value.Count(); y++)
+                {
+
+                    //get the vertice index(ID) and its x,y,z
+                    var vertice_index = x.Value[y];
+
+                    X = Math.Round((double)verts[x.Value[y]].X, 2);
+                    Y = Math.Round((double)verts[x.Value[y]].Y, 2);
+                    Z = Math.Round((double)verts[x.Value[y]].Z, 2);
+
+
+                    Console.WriteLine($"{GetIndent(15)}{vertice_index.ToString() + ": "}{X}{"|"}{Y}{"|"}{Z}");
+
+                    //writing in the xml file
+                    xmlWriter.WriteStartElement("Vertice");
+
+                    xmlWriter.WriteAttributeString("ID", vertice_index.ToString());
+
+                    xmlWriter.WriteElementString("X", X.ToString());
+                    xmlWriter.WriteElementString("Y", Y.ToString());
+                    xmlWriter.WriteElementString("Z", Z.ToString());
+
+                    //this is for the vertice_index
+                    xmlWriter.WriteEndElement();
+                }
+                //this is for the  vertices
+                xmlWriter.WriteEndElement();
+
+                //this is for the triangle id
+                xmlWriter.WriteEndElement();
+
+                triangle_index++;
+
+            }
+
+            //this is for the triangle Number
+            xmlWriter.WriteEndElement();
+
+
+            //this is for the face id
+            xmlWriter.WriteEndElement();
+        }
+        
+    }
+}
+

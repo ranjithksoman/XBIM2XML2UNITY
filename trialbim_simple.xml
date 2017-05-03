@@ -1,0 +1,558 @@
+<?xml version="1.0"?>
+<ProjectNumber Name="ProjectNumber" Type="IfcProject" ID="108" CreateGameObject="True" Parent="Root" ParentID="0000">
+  <Default Name="Default" Type="IfcSite" ID="539" CreateGameObject="True" Parent="ProjectNumber" ParentID="108">
+    <Translations CreateGameObject="False">
+      <TranslationX>0</TranslationX>
+      <TranslationY>0</TranslationY>
+      <TranslationZ>0</TranslationZ>
+    </Translations>
+    <NameIsMissing Name="NameIsMissing" Type="IfcBuilding" ID="118" CreateGameObject="True" Parent="Default" ParentID="539">
+      <Translations CreateGameObject="False">
+        <TranslationX>0</TranslationX>
+        <TranslationY>0</TranslationY>
+        <TranslationZ>0</TranslationZ>
+      </Translations>
+      <Level04-TOFndWall Name="Level04-TOFndWall" Type="IfcBuildingStorey" ID="141" CreateGameObject="True" Parent="NameIsMissing" ParentID="118">
+        <Translations CreateGameObject="False">
+          <TranslationX>0</TranslationX>
+          <TranslationY>0</TranslationY>
+          <TranslationZ>-1</TranslationZ>
+        </Translations>
+        <WallFoundationBearingFooting-36x12257020 Name="WallFoundationBearingFooting-36x12257020" Type="IfcFooting" ID="371" CreateGameObject="True" Parent="Level04-TOFndWall" ParentID="141">
+          <Translations CreateGameObject="False">
+            <TranslationX>0</TranslationX>
+            <TranslationY>0</TranslationY>
+            <TranslationZ>-1</TranslationZ>
+          </Translations>
+          <VertexIndices CreateGameObject="False">
+            <VertexIndices>[0, 1, 2, 1, 0, 3, 1, 4, 2, 4, 1, 5, 5, 6, 4, 6, 5, 7, 6, 3, 0, 3, 6, 7, 3, 5, 1, 5, 3, 7, 4, 0, 2, 0, 4, 6]</VertexIndices>
+          </VertexIndices>
+          <Vertices CreateGameObject="False">
+            <0 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>-20.12</Y>
+              <Z>0</Z>
+            </0>
+            <1 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>42.88</Y>
+              <Z>-1</Z>
+            </1>
+            <2 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>42.88</Y>
+              <Z>0</Z>
+            </2>
+            <3 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>-20.12</Y>
+              <Z>-1</Z>
+            </3>
+            <4 CreateGameObject="False">
+              <X>-23.59</X>
+              <Y>42.88</Y>
+              <Z>0</Z>
+            </4>
+            <5 CreateGameObject="False">
+              <X>-23.59</X>
+              <Y>42.88</Y>
+              <Z>-1</Z>
+            </5>
+            <6 CreateGameObject="False">
+              <X>-23.59</X>
+              <Y>-20.12</Y>
+              <Z>0</Z>
+            </6>
+            <7 CreateGameObject="False">
+              <X>-23.59</X>
+              <Y>-20.12</Y>
+              <Z>-1</Z>
+            </7>
+          </Vertices>
+        </WallFoundationBearingFooting-36x12257020>
+        <WallFoundationBearingFooting-36x12257030 Name="WallFoundationBearingFooting-36x12257030" Type="IfcFooting" ID="405" CreateGameObject="True" Parent="Level04-TOFndWall" ParentID="141">
+          <Translations CreateGameObject="False">
+            <TranslationX>0</TranslationX>
+            <TranslationY>0</TranslationY>
+            <TranslationZ>-1</TranslationZ>
+          </Translations>
+          <VertexIndices CreateGameObject="False">
+            <VertexIndices>[0, 1, 2, 1, 0, 3, 3, 4, 1, 4, 3, 5, 4, 6, 7, 6, 4, 5, 7, 0, 2, 0, 7, 6, 6, 3, 0, 3, 6, 5, 1, 7, 2, 7, 1, 4]</VertexIndices>
+          </VertexIndices>
+          <Vertices CreateGameObject="False">
+            <0 CreateGameObject="False">
+              <X>103.41</X>
+              <Y>42.88</Y>
+              <Z>-1</Z>
+            </0>
+            <1 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>42.88</Y>
+              <Z>0</Z>
+            </1>
+            <2 CreateGameObject="False">
+              <X>103.41</X>
+              <Y>42.88</Y>
+              <Z>0</Z>
+            </2>
+            <3 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>42.88</Y>
+              <Z>-1</Z>
+            </3>
+            <4 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>39.88</Y>
+              <Z>0</Z>
+            </4>
+            <5 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>39.88</Y>
+              <Z>-1</Z>
+            </5>
+            <6 CreateGameObject="False">
+              <X>103.41</X>
+              <Y>39.88</Y>
+              <Z>-1</Z>
+            </6>
+            <7 CreateGameObject="False">
+              <X>103.41</X>
+              <Y>39.88</Y>
+              <Z>0</Z>
+            </7>
+          </Vertices>
+        </WallFoundationBearingFooting-36x12257030>
+        <WallFoundationBearingFooting-36x12257040 Name="WallFoundationBearingFooting-36x12257040" Type="IfcFooting" ID="429" CreateGameObject="True" Parent="Level04-TOFndWall" ParentID="141">
+          <Translations CreateGameObject="False">
+            <TranslationX>0</TranslationX>
+            <TranslationY>0</TranslationY>
+            <TranslationZ>-1</TranslationZ>
+          </Translations>
+          <VertexIndices CreateGameObject="False">
+            <VertexIndices>[0, 1, 2, 1, 0, 3, 1, 4, 2, 4, 1, 5, 5, 6, 4, 6, 5, 7, 6, 3, 0, 3, 6, 7, 3, 5, 1, 5, 3, 7, 4, 0, 2, 0, 4, 6]</VertexIndices>
+          </VertexIndices>
+          <Vertices CreateGameObject="False">
+            <0 CreateGameObject="False">
+              <X>103.41</X>
+              <Y>-20.12</Y>
+              <Z>0</Z>
+            </0>
+            <1 CreateGameObject="False">
+              <X>103.41</X>
+              <Y>39.88</Y>
+              <Z>-1</Z>
+            </1>
+            <2 CreateGameObject="False">
+              <X>103.41</X>
+              <Y>39.88</Y>
+              <Z>0</Z>
+            </2>
+            <3 CreateGameObject="False">
+              <X>103.41</X>
+              <Y>-20.12</Y>
+              <Z>-1</Z>
+            </3>
+            <4 CreateGameObject="False">
+              <X>100.41</X>
+              <Y>39.88</Y>
+              <Z>0</Z>
+            </4>
+            <5 CreateGameObject="False">
+              <X>100.41</X>
+              <Y>39.88</Y>
+              <Z>-1</Z>
+            </5>
+            <6 CreateGameObject="False">
+              <X>100.41</X>
+              <Y>-20.12</Y>
+              <Z>0</Z>
+            </6>
+            <7 CreateGameObject="False">
+              <X>100.41</X>
+              <Y>-20.12</Y>
+              <Z>-1</Z>
+            </7>
+          </Vertices>
+        </WallFoundationBearingFooting-36x12257040>
+        <WallFoundationBearingFooting-36x12257050 Name="WallFoundationBearingFooting-36x12257050" Type="IfcFooting" ID="453" CreateGameObject="True" Parent="Level04-TOFndWall" ParentID="141">
+          <Translations CreateGameObject="False">
+            <TranslationX>0</TranslationX>
+            <TranslationY>0</TranslationY>
+            <TranslationZ>-1</TranslationZ>
+          </Translations>
+          <VertexIndices CreateGameObject="False">
+            <VertexIndices>[0, 1, 2, 1, 0, 3, 2, 4, 5, 4, 2, 1, 4, 6, 5, 6, 4, 7, 7, 0, 6, 0, 7, 3, 1, 7, 4, 7, 1, 3, 6, 2, 5, 2, 6, 0]</VertexIndices>
+          </VertexIndices>
+          <Vertices CreateGameObject="False">
+            <0 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>-20.12</Y>
+              <Z>0</Z>
+            </0>
+            <1 CreateGameObject="False">
+              <X>100.41</X>
+              <Y>-20.12</Y>
+              <Z>-1</Z>
+            </1>
+            <2 CreateGameObject="False">
+              <X>100.41</X>
+              <Y>-20.12</Y>
+              <Z>0</Z>
+            </2>
+            <3 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>-20.12</Y>
+              <Z>-1</Z>
+            </3>
+            <4 CreateGameObject="False">
+              <X>100.41</X>
+              <Y>-17.12</Y>
+              <Z>-1</Z>
+            </4>
+            <5 CreateGameObject="False">
+              <X>100.41</X>
+              <Y>-17.12</Y>
+              <Z>0</Z>
+            </5>
+            <6 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>-17.12</Y>
+              <Z>0</Z>
+            </6>
+            <7 CreateGameObject="False">
+              <X>-20.59</X>
+              <Y>-17.12</Y>
+              <Z>-1</Z>
+            </7>
+          </Vertices>
+        </WallFoundationBearingFooting-36x12257050>
+      </Level04-TOFndWall>
+      <Level1 Name="Level1" Type="IfcBuildingStorey" ID="145" CreateGameObject="True" Parent="NameIsMissing" ParentID="118">
+        <Translations CreateGameObject="False">
+          <TranslationX>0</TranslationX>
+          <TranslationY>0</TranslationY>
+          <TranslationZ>0</TranslationZ>
+        </Translations>
+        <BasicWallGeneric-8256792 Name="BasicWallGeneric-8256792" Type="IfcWallStandardCase" ID="187" CreateGameObject="True" Parent="Level1" ParentID="145">
+          <Translations CreateGameObject="False">
+            <TranslationX>-22.4207653887737</TranslationX>
+            <TranslationY>41.3843777152638</TranslationY>
+            <TranslationZ>0</TranslationZ>
+          </Translations>
+          <VertexIndices CreateGameObject="False">
+            <VertexIndices>[0, 1, 2, 1, 0, 3, 3, 4, 1, 4, 3, 5, 4, 6, 7, 6, 4, 5, 7, 0, 2, 0, 7, 6, 6, 3, 0, 3, 6, 5, 1, 7, 2, 7, 1, 4]</VertexIndices>
+          </VertexIndices>
+          <Vertices CreateGameObject="False">
+            <0 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>41.72</Y>
+              <Z>0</Z>
+            </0>
+            <1 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>41.72</Y>
+              <Z>10</Z>
+            </1>
+            <2 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>41.72</Y>
+              <Z>10</Z>
+            </2>
+            <3 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>41.72</Y>
+              <Z>0</Z>
+            </3>
+            <4 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>41.05</Y>
+              <Z>10</Z>
+            </4>
+            <5 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>41.05</Y>
+              <Z>0</Z>
+            </5>
+            <6 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>41.05</Y>
+              <Z>0</Z>
+            </6>
+            <7 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>41.05</Y>
+              <Z>10</Z>
+            </7>
+          </Vertices>
+        </BasicWallGeneric-8256792>
+        <BasicWallGeneric-8256867 Name="BasicWallGeneric-8256867" Type="IfcWallStandardCase" ID="259" CreateGameObject="True" Parent="Level1" ParentID="145">
+          <Translations CreateGameObject="False">
+            <TranslationX>101.91256794456</TranslationX>
+            <TranslationY>41.0510443819301</TranslationY>
+            <TranslationZ>0</TranslationZ>
+          </Translations>
+          <VertexIndices CreateGameObject="False">
+            <VertexIndices>[0, 1, 2, 1, 0, 3, 3, 4, 1, 4, 3, 5, 4, 6, 7, 6, 4, 5, 7, 0, 2, 0, 7, 6, 6, 3, 0, 3, 6, 5, 1, 7, 2, 7, 1, 4]</VertexIndices>
+          </VertexIndices>
+          <Vertices CreateGameObject="False">
+            <0 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>-18.95</Y>
+              <Z>0</Z>
+            </0>
+            <1 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>41.05</Y>
+              <Z>10</Z>
+            </1>
+            <2 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>-18.95</Y>
+              <Z>10</Z>
+            </2>
+            <3 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>41.05</Y>
+              <Z>0</Z>
+            </3>
+            <4 CreateGameObject="False">
+              <X>101.58</X>
+              <Y>41.05</Y>
+              <Z>10</Z>
+            </4>
+            <5 CreateGameObject="False">
+              <X>101.58</X>
+              <Y>41.05</Y>
+              <Z>0</Z>
+            </5>
+            <6 CreateGameObject="False">
+              <X>101.58</X>
+              <Y>-18.95</Y>
+              <Z>0</Z>
+            </6>
+            <7 CreateGameObject="False">
+              <X>101.58</X>
+              <Y>-18.95</Y>
+              <Z>10</Z>
+            </7>
+          </Vertices>
+        </BasicWallGeneric-8256867>
+        <BasicWallGeneric-8256933 Name="BasicWallGeneric-8256933" Type="IfcWallStandardCase" ID="296" CreateGameObject="True" Parent="Level1" ParentID="145">
+          <Translations CreateGameObject="False">
+            <TranslationX>101.579234611227</TranslationX>
+            <TranslationY>-18.6156222847366</TranslationY>
+            <TranslationZ>0</TranslationZ>
+          </Translations>
+          <VertexIndices CreateGameObject="False">
+            <VertexIndices>[0, 1, 2, 1, 0, 3, 3, 4, 1, 4, 3, 5, 4, 6, 7, 6, 4, 5, 7, 0, 2, 0, 7, 6, 6, 3, 0, 3, 6, 5, 1, 7, 2, 7, 1, 4]</VertexIndices>
+          </VertexIndices>
+          <Vertices CreateGameObject="False">
+            <0 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>-18.95</Y>
+              <Z>0</Z>
+            </0>
+            <1 CreateGameObject="False">
+              <X>101.58</X>
+              <Y>-18.95</Y>
+              <Z>10</Z>
+            </1>
+            <2 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>-18.95</Y>
+              <Z>10</Z>
+            </2>
+            <3 CreateGameObject="False">
+              <X>101.58</X>
+              <Y>-18.95</Y>
+              <Z>0</Z>
+            </3>
+            <4 CreateGameObject="False">
+              <X>101.58</X>
+              <Y>-18.28</Y>
+              <Z>10</Z>
+            </4>
+            <5 CreateGameObject="False">
+              <X>101.58</X>
+              <Y>-18.28</Y>
+              <Z>0</Z>
+            </5>
+            <6 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>-18.28</Y>
+              <Z>0</Z>
+            </6>
+            <7 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>-18.28</Y>
+              <Z>10</Z>
+            </7>
+          </Vertices>
+        </BasicWallGeneric-8256933>
+        <BasicWallGeneric-8256996 Name="BasicWallGeneric-8256996" Type="IfcWallStandardCase" ID="333" CreateGameObject="True" Parent="Level1" ParentID="145">
+          <Translations CreateGameObject="False">
+            <TranslationX>-22.0874320554404</TranslationX>
+            <TranslationY>-18.2822889514028</TranslationY>
+            <TranslationZ>0</TranslationZ>
+          </Translations>
+          <VertexIndices CreateGameObject="False">
+            <VertexIndices>[0, 1, 2, 1, 0, 3, 3, 4, 1, 4, 3, 5, 4, 6, 7, 6, 4, 5, 7, 0, 2, 0, 7, 6, 6, 3, 0, 3, 6, 5, 1, 7, 2, 7, 1, 4]</VertexIndices>
+          </VertexIndices>
+          <Vertices CreateGameObject="False">
+            <0 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>41.05</Y>
+              <Z>0</Z>
+            </0>
+            <1 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>-18.28</Y>
+              <Z>10</Z>
+            </1>
+            <2 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>41.05</Y>
+              <Z>10</Z>
+            </2>
+            <3 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>-18.28</Y>
+              <Z>0</Z>
+            </3>
+            <4 CreateGameObject="False">
+              <X>-21.75</X>
+              <Y>-18.28</Y>
+              <Z>10</Z>
+            </4>
+            <5 CreateGameObject="False">
+              <X>-21.75</X>
+              <Y>-18.28</Y>
+              <Z>0</Z>
+            </5>
+            <6 CreateGameObject="False">
+              <X>-21.75</X>
+              <Y>41.05</Y>
+              <Z>0</Z>
+            </6>
+            <7 CreateGameObject="False">
+              <X>-21.75</X>
+              <Y>41.05</Y>
+              <Z>10</Z>
+            </7>
+          </Vertices>
+        </BasicWallGeneric-8256996>
+        <FloorConcreteSlab-6257062 Name="FloorConcreteSlab-6257062" Type="IfcSlab" ID="479" CreateGameObject="True" Parent="Level1" ParentID="145">
+          <Translations CreateGameObject="False">
+            <TranslationX>0</TranslationX>
+            <TranslationY>0</TranslationY>
+            <TranslationZ>0</TranslationZ>
+          </Translations>
+          <VertexIndices CreateGameObject="False">
+            <VertexIndices>[0, 1, 2, 1, 0, 3, 4, 2, 5, 2, 4, 0, 6, 4, 5, 4, 6, 7, 1, 7, 6, 7, 1, 3, 2, 6, 5, 6, 2, 1, 7, 0, 4, 0, 7, 3]</VertexIndices>
+          </VertexIndices>
+          <Vertices CreateGameObject="False">
+            <0 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>41.72</Y>
+              <Z>-0.5</Z>
+            </0>
+            <1 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>-18.95</Y>
+              <Z>0</Z>
+            </1>
+            <2 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>41.72</Y>
+              <Z>0</Z>
+            </2>
+            <3 CreateGameObject="False">
+              <X>-22.42</X>
+              <Y>-18.95</Y>
+              <Z>-0.5</Z>
+            </3>
+            <4 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>41.72</Y>
+              <Z>-0.5</Z>
+            </4>
+            <5 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>41.72</Y>
+              <Z>0</Z>
+            </5>
+            <6 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>-18.95</Y>
+              <Z>0</Z>
+            </6>
+            <7 CreateGameObject="False">
+              <X>102.25</X>
+              <Y>-18.95</Y>
+              <Z>-0.5</Z>
+            </7>
+          </Vertices>
+        </FloorConcreteSlab-6257062>
+      </Level1>
+      <Roof Name="Roof" Type="IfcBuildingStorey" ID="151" CreateGameObject="True" Parent="NameIsMissing" ParentID="118">
+        <Translations CreateGameObject="False">
+          <TranslationX>0</TranslationX>
+          <TranslationY>0</TranslationY>
+          <TranslationZ>10</TranslationZ>
+        </Translations>
+        <FloorConcreteSlab-6257143 Name="FloorConcreteSlab-6257143" Type="IfcSlab" ID="522" CreateGameObject="True" Parent="Roof" ParentID="151">
+          <Translations CreateGameObject="False">
+            <TranslationX>0</TranslationX>
+            <TranslationY>0</TranslationY>
+            <TranslationZ>10</TranslationZ>
+          </Translations>
+          <VertexIndices CreateGameObject="False">
+            <VertexIndices>[0, 1, 2, 1, 0, 3, 4, 2, 5, 2, 4, 0, 6, 4, 5, 4, 6, 7, 1, 7, 6, 7, 1, 3, 2, 6, 5, 6, 2, 1, 7, 0, 4, 0, 7, 3]</VertexIndices>
+          </VertexIndices>
+          <Vertices CreateGameObject="False">
+            <0 CreateGameObject="False">
+              <X>-22.69</X>
+              <Y>41.72</Y>
+              <Z>9.5</Z>
+            </0>
+            <1 CreateGameObject="False">
+              <X>-22.69</X>
+              <Y>-18.95</Y>
+              <Z>10</Z>
+            </1>
+            <2 CreateGameObject="False">
+              <X>-22.69</X>
+              <Y>41.72</Y>
+              <Z>10</Z>
+            </2>
+            <3 CreateGameObject="False">
+              <X>-22.69</X>
+              <Y>-18.95</Y>
+              <Z>9.5</Z>
+            </3>
+            <4 CreateGameObject="False">
+              <X>101.98</X>
+              <Y>41.72</Y>
+              <Z>9.5</Z>
+            </4>
+            <5 CreateGameObject="False">
+              <X>101.98</X>
+              <Y>41.72</Y>
+              <Z>10</Z>
+            </5>
+            <6 CreateGameObject="False">
+              <X>101.98</X>
+              <Y>-18.95</Y>
+              <Z>10</Z>
+            </6>
+            <7 CreateGameObject="False">
+              <X>101.98</X>
+              <Y>-18.95</Y>
+              <Z>9.5</Z>
+            </7>
+          </Vertices>
+        </FloorConcreteSlab-6257143>
+      </Roof>
+    </NameIsMissing>
+  </Default>
+</ProjectNumber>
