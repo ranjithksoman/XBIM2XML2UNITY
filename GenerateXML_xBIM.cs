@@ -27,7 +27,7 @@ using Xbim.Ifc2x3.GeometryResource;
 
 namespace XBIM_to_XML_Application
 {
-    class Program
+    class GenerateXML_xBIM
     {
 
         const string file = "D:/Ani_Thesis/RecentWork_05052017/trialbim_simple.ifc";
