@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,11 +27,11 @@ using Xbim.Ifc2x3.GeometryResource;
 
 namespace XBIM_to_XML_Application
 {
-    class GenerateXML_xBIM
+    class GenerateXML_xBIM_WithMesh
     {
 
-        const string file = "D:/Ani_Thesis/RecentWork_05052017/trialbim_simple.ifc";
-        //const string file = "D:/THESIS_ANI/RecentWork_04052017/trialbim_simple.ifc";
+        //const string file = "D:/Ani_Thesis/RecentWork_05052017/trialbim_simple.ifc";
+        const string file = "D:/THESIS_ANI/RecentWork_05052017/trialbim_simple.ifc";
         
         //static Dictionary<int, Dictionary<int,Dictionary<int,Dictionary<int,List<int>>>>> temp;
 
@@ -128,6 +128,7 @@ namespace XBIM_to_XML_Application
             xmlWriter.WriteAttributeString("Type", o.GetType().Name.ToString());
             xmlWriter.WriteAttributeString("ID", o.EntityLabel.ToString()); //working
             xmlWriter.WriteAttributeString("CreateGameObject", "True"); //working
+            xmlWriter.WriteAttributeString("GenerateMesh", "False"); //trial
 
             if (!(o.GetType().Name == "IfcProject"))
             {
@@ -167,6 +168,7 @@ namespace XBIM_to_XML_Application
                 /**************************************************************************/
                 xmlWriter.WriteStartElement("Translations");
                 xmlWriter.WriteAttributeString("CreateGameObject", "False"); //working
+                xmlWriter.WriteAttributeString("GenerateMesh", "False"); //trial
 
                 xmlWriter.WriteElementString("TranslationX", (t.X).ToString());
                 xmlWriter.WriteElementString("TranslationY", (t.Y).ToString());
@@ -254,6 +256,7 @@ namespace XBIM_to_XML_Application
                             xmlWriter.WriteAttributeString("Type", type_of_shape);
                             xmlWriter.WriteAttributeString("ID", sne.EntityLabel.ToString());
                             xmlWriter.WriteAttributeString("CreateGameObject", "True"); //working
+                            xmlWriter.WriteAttributeString("GenerateMesh", "True"); //trial
                             xmlWriter.WriteAttributeString("Parent", parent_name);
                             xmlWriter.WriteAttributeString("ParentID", parent.EntityLabel.ToString());
 
@@ -269,7 +272,8 @@ namespace XBIM_to_XML_Application
                             /*******************************Trial************************************/
                             xmlWriter.WriteStartElement("Vertices"); //start
                             xmlWriter.WriteAttributeString("CreateGameObject", "False"); //working
-                            
+                            xmlWriter.WriteAttributeString("GenerateMesh", "False"); //trial
+
                             XbimShapeTriangulation meshforthisshape =  getgeometry(si, mod_context,sne.EntityLabel, number_of_shapes);
                             int vertind = 0;
                             vert_locations = meshforthisshape.Vertices.ToList();
@@ -282,6 +286,7 @@ namespace XBIM_to_XML_Application
                                 /*******************************************************************************/
                                 xmlWriter.WriteStartElement(vertind.ToString()); //start
                                 xmlWriter.WriteAttributeString("CreateGameObject", "False"); //working
+                                xmlWriter.WriteAttributeString("GenerateMesh", "False"); //trial
                                 xmlWriter.WriteElementString("X", (Math.Round((double)v_l.X, 2)).ToString());
                                 xmlWriter.WriteElementString("Y", (Math.Round((double)v_l.Y, 2)).ToString());
                                 xmlWriter.WriteElementString("Z", (Math.Round((double)v_l.Z, 2)).ToString());
@@ -363,20 +368,21 @@ namespace XBIM_to_XML_Application
                             xmlWriter.WriteAttributeString("Type", type_of_shape);
                             xmlWriter.WriteAttributeString("ID", bsne.EntityLabel.ToString());
                             xmlWriter.WriteAttributeString("CreateGameObject", "True"); //working
+                            xmlWriter.WriteAttributeString("GenerateMesh", "True"); //trial
                             xmlWriter.WriteAttributeString("Parent", parent_name);
                             xmlWriter.WriteAttributeString("ParentID", parent.EntityLabel.ToString());
 
                             /*************************trial*********************************************/
                             xmlWriter.WriteStartElement("Translations");
                             xmlWriter.WriteAttributeString("CreateGameObject", "False"); //working
+                            xmlWriter.WriteAttributeString("GenerateMesh", "False"); //trial
 
                             xmlWriter.WriteElementString("TranslationX", (t_bsne.X).ToString());
                             xmlWriter.WriteElementString("TranslationY", (t_bsne.Y).ToString());
                             xmlWriter.WriteElementString("TranslationZ", (t_bsne.Z).ToString());
 
                             xmlWriter.WriteEndElement();
-                            /**************************************************************************/
-                            //getgeometry(si, mod_context, bsne.EntityLabel, number_of_shapes);
+                            
                             /*******************************Trial************************************/
                             XbimShapeTriangulation meshforthisshape = getgeometry(si, mod_context, bsne.EntityLabel, number_of_shapes); // get the shape reprepresentation mesh for this shapeinstance
                             int vertind = 0;
@@ -386,14 +392,17 @@ namespace XBIM_to_XML_Application
 
                             xmlWriter.WriteStartElement("Vertices"); //start
                             xmlWriter.WriteAttributeString("CreateGameObject", "False"); //working
+                            xmlWriter.WriteAttributeString("GenerateMesh", "False"); //trial
+                            xmlWriter.WriteAttributeString("CountOfVertices", vert_locations.Count.ToString()); //working
 
                             foreach (XbimPoint3D v_l in vert_locations)
                             {
-                                //Console.WriteLine(GetIndent(11) + "[{0}]", string.Join(", ", v_l));
                                 Console.WriteLine(GetIndent(11) + v_l.ToString());
                                 /*******************************************************************************/
-                                xmlWriter.WriteStartElement(vertind.ToString()); //start
+                                xmlWriter.WriteStartElement("Index"); //start
+                                xmlWriter.WriteAttributeString("ID", vertind.ToString()); //working
                                 xmlWriter.WriteAttributeString("CreateGameObject", "False"); //working
+                                xmlWriter.WriteAttributeString("GenerateMesh", "False"); //trial
                                 xmlWriter.WriteElementString("X", (Math.Round((double)v_l.X, 2)).ToString() );
                                 xmlWriter.WriteElementString("Y", (Math.Round((double)v_l.Y, 2)).ToString());
                                 xmlWriter.WriteElementString("Z", (Math.Round((double)v_l.Z, 2)).ToString());
@@ -504,12 +513,14 @@ namespace XBIM_to_XML_Application
 
             Console.WriteLine($"{"\n"}{GetIndent(11)}{"-----Vertices_indices for this face: " + shape.IfcProductLabel.ToString()}");
             Console.WriteLine($"{"\n"}{GetIndent(11)}{"-------------------" + vertices.Count() + "--------------------"}");
-            Console.WriteLine(GetIndent(11)+ "[{0}]", string.Join(", ", vertices));
+            Console.WriteLine(GetIndent(11)+ "{0}", string.Join(", ", vertices));
 
             /**********************************************************TRIAL******************************************************************/
             xmlWriter.WriteStartElement("VertexIndices");
             xmlWriter.WriteAttributeString("CreateGameObject", "False"); //working
-            xmlWriter.WriteElementString("VertexIndices", string.Format("[{0}]", string.Join(", ", vertices)));
+            xmlWriter.WriteAttributeString("GenerateMesh", "False"); //trial
+            xmlWriter.WriteAttributeString("CountOfVertexIndices", vertices.Count.ToString()); //working
+            xmlWriter.WriteElementString("V_Indices", string.Format("{0}", string.Join(", ", vertices)));
             xmlWriter.WriteEndElement();
            
             /********************************************************************************************************************************/
